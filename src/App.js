@@ -23,61 +23,75 @@ import PersonDetailPage from "./pages/person/PersonDetailPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 
+let pathPrefix;
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  pathPrefix = "";
+} else {
+  pathPrefix = "/cloud-movie-frontend";
+}
+
 function App() {
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/" exact>
+        <Route path={`${pathPrefix}/`} exact>
           <HomePage />
         </Route>
 
-        <Route path="/movie/search/" exact>
+        <Route path={`${pathPrefix}/movie/search/`} exact>
           <SearchMovie />
         </Route>
-        <Route path="/movie/search/:name/:page" exact>
+        <Route path={`${pathPrefix}/movie/search/:name/:page`} exact>
           <MatchedMovies />
         </Route>
-        <Route path="/movie/detail/:id" exact>
+        <Route path={`${pathPrefix}/movie/detail/:id`} exact>
           <DetailProvider>
             <MovieTvDetailPage type="movie" />
           </DetailProvider>
         </Route>
 
-        <Route path="/tv/search/" exact>
+        <Route path={`${pathPrefix}/tv/search/`} exact>
           <SearchTv />
         </Route>
-        <Route path="/tv/search/:name/:page" exact>
+        <Route path={`${pathPrefix}/tv/search/:name/:page`} exact>
           <MatchedTv />
         </Route>
-        <Route path="/tv/detail/:id" exact>
+        <Route path={`${pathPrefix}/tv/detail/:id`} exact>
           <DetailProvider>
             <MovieTvDetailPage type="tv" />
           </DetailProvider>
         </Route>
 
-        <Route path="/person/search/" exact>
+        <Route path={`${pathPrefix}/person/search/`} exact>
           <SearchPerson />
         </Route>
-        <Route path="/person/search/:name/:page" exact>
+        <Route path={`${pathPrefix}/person/search/:name/:page`} exact>
           <MatchedPeople />
         </Route>
-        <Route path="/person/detail/:id" exact>
+        <Route path={`${pathPrefix}/person/detail/:id`} exact>
           <DetailProvider>
             <PersonDetailPage />
           </DetailProvider>
         </Route>
 
-        <Route path="/:type/detail/:id/videos/:noPerPage/:page" exact>
+        <Route
+          path={`${pathPrefix}/:type/detail/:id/videos/:noPerPage/:page`}
+          exact
+        >
           <VideoPage />
         </Route>
-        <Route path="/:type/detail/:id/reviews/:page" exact>
+        <Route path={`${pathPrefix}/:type/detail/:id/reviews/:page`} exact>
           <ReviewPage />
         </Route>
-        <Route path="/:type/detail/:id/reviews" exact>
+        <Route path={`${pathPrefix}/:type/detail/:id/reviews`} exact>
           <SingleReviewPage />
         </Route>
-        <Route path="/:type/detail/:id/recommendations/:page" exact>
+        <Route
+          path={`${pathPrefix}/:type/detail/:id/recommendations/:page`}
+          exact
+        >
           <RecommendationPage />
         </Route>
       </Switch>
