@@ -23,21 +23,9 @@ import PersonDetailPage from "./pages/person/PersonDetailPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 
-let basename;
-
-if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  basename = "/";
-} else {
-  basename = "/cloud-movie-frontend";
-}
-
-basename = "/cloud-movie-frontend";
-/* console.log("basename");
-console.log(basename);
- */
 function App() {
   return (
-    <Router basename={basename}>
+    <Router basename={"/cloud-movie-frontend"}>
       <Navbar />
       <Switch>
         <Route path="/" exact>

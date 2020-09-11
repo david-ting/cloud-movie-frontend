@@ -11,10 +11,10 @@ function Navbar() {
     <IconContext.Provider value={{ color: "white", size: "1.5rem" }}>
       <>
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <MdCloud className="mr-2" />
             Cloud Movie
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
