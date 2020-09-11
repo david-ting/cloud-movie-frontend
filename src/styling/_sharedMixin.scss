@@ -1,0 +1,19 @@
+@mixin anchor-white {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  
+  @mixin anchor-black {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+      color: black;
+    }
+  }

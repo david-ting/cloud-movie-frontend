@@ -1,0 +1,351 @@
+@import "./movie_tv/index";
+@import "./person/index";
+@import "./home/index";
+@import "./sharedMixin";
+
+$themeColor: rgb(33, 99, 214);
+$themeLighterColor: rgb(25, 109, 154);
+
+// @mixin anchor-white {
+//   &:link,
+//   &:visited,
+//   &:hover,
+//   &:active {
+//     text-decoration: none;
+//     color: white;
+//   }
+// }
+
+// @mixin anchor-black {
+//   &:link,
+//   &:visited,
+//   &:hover,
+//   &:active {
+//     text-decoration: none;
+//     color: black;
+//   }
+// }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: rgb(255, 255, 255);
+  padding: 50px 0 50px 0;
+  position: relative;
+}
+
+#mainContainer {
+  background-color: rgb(230, 230, 243);
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: $themeColor;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  a {
+    @include anchor-white;
+  }
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $themeColor;
+  color: white;
+  height: 50px;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span,
+  a {
+    margin-right: 6px;
+    @include anchor-white;
+  }
+}
+.slideButtonGroup {
+  width: 150px;
+  height: 30px;
+  border: 1px solid $themeColor;
+  border-radius: 50px;
+  display: inline-block;
+  position: relative;
+
+  .slideButton,
+  .slideOver {
+    position: absolute;
+    top: 0;
+    border: none;
+    width: calc(50% + 5px);
+    height: 28px;
+    border-radius: 50px;
+    background-color: transparent;
+    &:focus {
+      outline: none;
+    }
+  }
+  .slideOver {
+    height: 28.5px;
+  }
+  .slideButton-active {
+    color: white;
+    transition-delay: 0.2s;
+  }
+  .slideButton:nth-child(2) {
+    left: 70px;
+  }
+  .slideOver {
+    background: $themeColor;
+    left: 0;
+    transition: left 0.2s linear;
+    z-index: -1000;
+  }
+  .slideOver-clicked {
+    left: 70px;
+  }
+}
+
+.switch {
+  position: relative;
+  height: 26px;
+  width: 70px;
+
+  .slider-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: gray;
+    border-radius: 13px;
+    height: 100%;
+    width: 100%;
+    color: white;
+    span {
+      position: absolute;
+      left: 30px;
+      transition: left 0.5s;
+    }
+  }
+
+  input {
+    display: none;
+    top: -40px;
+    &:checked + .slider-background {
+      background-color: $themeColor;
+      span {
+        left: 12px;
+      }
+    }
+    &:checked ~ .round {
+      left: 47px;
+    }
+  }
+  .round {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: left 0.5s;
+  }
+}
+
+.btn-purple {
+  background-color: $themeColor;
+
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.carouselWrapper {
+  padding: 0 30px 0 30px;
+  .slick-prev:before,
+  .slick-next:before {
+    color: rgb(132, 123, 150);
+  }
+
+  .slick-slide {
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 5px solid rgba(255, 255, 255, 0);
+    max-width: 300px;
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+    .img-fadeIn {
+      animation: fadeIn 2.5s;
+    }
+  }
+  .slick-slider {
+    margin-bottom: 30px;
+  }
+}
+
+.youtubeModalWrapper {
+  position: relative;
+
+  .modal {
+    z-index: 100001;
+  }
+  .ytPreviewOuterWrapper {
+    width: 400px;
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+    .ytPreviewInnerWrapper {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  .modalTriger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-dialog {
+    max-width: 75vw;
+    margin: 1% auto 0 auto;
+    position: relative;
+    @media only screen and (max-width: 600px) {
+      max-width: 100vw;
+    }
+  }
+  .modal-body {
+    text-align: center;
+    iframe {
+      width: 70vw;
+      height: 40vw;
+      @media only screen and (max-width: 600px) {
+        width: 95vw;
+        height: 53vw;
+      }
+    }
+
+    padding: 5px 0 0 0;
+  }
+}
+
+.videoWrapper,
+.carouselWrapper {
+  margin-top: 16px;
+}
+.videoWrapper {
+  display: flex;
+  h5:first-child {
+    width: 100%;
+  }
+  .youtubeModalWrapper {
+    margin-top: 10px;
+    width: calc(100% / 3);
+    @media only screen and (max-width: 1000px) {
+      width: calc(100% / 2);
+    }
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+
+  flex-wrap: wrap;
+}
+
+.reviewWrapper {
+  max-height: 200px;
+  position: relative;
+  overflow: hidden;
+  a {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    margin: 0;
+    z-index: 1001;
+  }
+  .whiteFilter {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 40%;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.9)
+    );
+    z-index: 1000;
+  }
+}
+
+.grayBorderWrapper {
+  white-space: pre-line;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 0px 2px 1px rgba(185, 172, 172, 0.5);
+}
+
+#topPicture {
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: $themeLighterColor;
+  color: white;
+  img {
+    width: 80px;
+  }
+  a {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}

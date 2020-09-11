@@ -1,0 +1,74 @@
+.personCard {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 0;
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  &:nth-child(even) {
+    background-color: rgb(248, 245, 240);
+  }
+}
+
+.personCardImageWrapper {
+  padding: 0 30px 0 10px;
+  flex-shrink: 0;
+  > div {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+}
+
+.personCardInfoWrapper {
+  flex-basis: 100%;
+}
+
+// detail
+#personWrapper {
+  padding: 50px 0 50px 0;
+  display: grid;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
+  grid-template-columns: 300px auto;
+
+  @media only screen and (max-width: 780px) {
+    grid-template-columns: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  img:first-child {
+    margin: 0 auto;
+    width: 300px;
+    border-radius: 10px;
+  }
+  #biographyContainer {
+    max-height: 200px;
+    position: relative;
+    overflow: hidden;
+    button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      z-index: 1001;
+    }
+    .whiteFilter {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 40%;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.9)
+      );
+      z-index: 1000;
+    }
+  }
+}
