@@ -31,6 +31,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   basename = "/cloud-movie-frontend";
 }
 
+basename = "/cloud-movie-frontend";
+/* console.log("basename");
+console.log(basename);
+ */
 function App() {
   return (
     <Router basename={basename}>
