@@ -16,7 +16,7 @@ export function formatNumber(number) {
 
 let fetchPrefix;
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
   fetchPrefix = "";
 } else {
   fetchPrefix = "https://cloud-movie-backend.herokuapp.com";
