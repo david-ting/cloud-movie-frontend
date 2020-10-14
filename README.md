@@ -1,6 +1,6 @@
 # :cloud: cloud-movie-frontend
 
-The project has been published to heroku. :star: Live demo: [**https://cloud-movie.herokuapp.com/**]
+The project has been published to heroku. :star: Live demo: **https://cloud-movie.herokuapp.com/**
 
 The api requests and web scraping are made by the [**cloud-movie-backend**](https://github.com/david-ting/cloud-movie-backend). 
 
@@ -15,11 +15,12 @@ It makes use of the TMDb API for providing users with up-to-date and reliable in
 The TMDb API could provide the links for the youtube videos related to the movies and tv. To enrich the information of the videos, 
 Youtube API is used to get the statistics of the videos, such as published date, view count, :thumbsup: like count  and :-1: dislike count. 
 
-### Framework
 
-It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate.
+
 
 ### Library
+
+It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate.
 
 • [**react-slick**](https://www.npmjs.com/package/react-slick)
 Create carousel for displaying movie & tv posters and celebrity images.
