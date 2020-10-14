@@ -1,6 +1,6 @@
-# cloud-movie-frontend
+# :cloud: cloud-movie-frontend
 
-The project has been published to heroku. Live demo: https://cloud-movie.herokuapp.com/
+The project has been published to heroku. :star: Live demo: https://cloud-movie.herokuapp.com/
 
 ### API
 
@@ -11,7 +11,7 @@ It makes use of the TMDb API for providing users with up-to-date and reliable in
 • [**Youtube API**](https://developers.google.com/youtube/v3/docs/)
 
 The TMDb API could provide the links for the youtube videos related to the movies and tv. To enrich the information of the videos, 
-Youtube API is used to get the statistics of the videos, such as published date, view count, like count and dislike count. 
+Youtube API is used to get the statistics of the videos, such as published date, view count, :thumbsup: like count  and :-1: dislike count. 
 
 ### Framework
 
