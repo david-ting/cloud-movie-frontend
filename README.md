@@ -4,7 +4,7 @@ The project has been published to heroku. Live demo: https://cloud-movie.herokua
 
 ### API
 
-• <a href="https://developers.themoviedb.org/3/getting-started/introduction">**TMDb API**</a> 
+• [**TMDb API**](https://developers.themoviedb.org/3/getting-started/introduction)
 
 It makes use of the TMDb API for providing users with up-to-date and reliable information about movies, tv shows and celebrities. 
 
