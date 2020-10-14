@@ -22,6 +22,9 @@ Youtube API is used to get the statistics of the videos, such as published date,
 
 It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate. Some other cool libraies are also used
 
+  • [**react-router**](https://www.npmjs.com/package/react-router)
+  Create client-side routing for the single page application
+
   • [**react-slick**](https://www.npmjs.com/package/react-slick)
   Create carousel for displaying movie & tv posters and celebrity images.
 
