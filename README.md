@@ -2,6 +2,8 @@
 
 The project has been published to heroku. :star: Live demo: https://cloud-movie.herokuapp.com/
 
+The api requests and web scraping are made by the [**cloud-movie-backend**](https://github.com/david-ting/cloud-movie-backend). 
+
 ### API
 
 • [**TMDb API**](https://developers.themoviedb.org/3/getting-started/introduction)
