@@ -12,6 +12,6 @@ It makes use of the <a href="https://developers.themoviedb.org/3/getting-started
 
 <h3>Framework</h3>
 
-It is built by the <b>Create React App</b> boilerplate.
+It is built with <a href="https://reactjs.org/"><b>React<b></a> and the <b>Create React App</b> boilerplate.
 
 <h3>Library</h3>
