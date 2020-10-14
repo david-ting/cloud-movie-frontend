@@ -18,21 +18,21 @@ Youtube API is used to get the statistics of the videos, such as published date,
 
 
 
-### Library
+### Libraries
 
-It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate.
+It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate. Some other cool libraies are also used
 
-• [**react-slick**](https://www.npmjs.com/package/react-slick)
-Create carousel for displaying movie & tv posters and celebrity images.
+  • [**react-slick**](https://www.npmjs.com/package/react-slick)
+  Create carousel for displaying movie & tv posters and celebrity images.
 
-• [**styled-components**](https://www.npmjs.com/package/styled-components)
-Create dynamic background image and color for the movie & tv information. 
+  • [**styled-components**](https://www.npmjs.com/package/styled-components)
+  Create dynamic background image and color for the movie & tv information. 
 
-• [**colorthief**](https://www.npmjs.com/package/colorthief)
-Grab the color palette from the movie and tv posters for setting the background color.
+  • [**colorthief**](https://www.npmjs.com/package/colorthief)
+  Grab the color palette from the movie and tv posters for setting the background color.
 
-• [**react-icons**](https://www.npmjs.com/package/react-icons)
-Get popular and customizable icons
+  • [**react-icons**](https://www.npmjs.com/package/react-icons)
+  Get popular and customizable icons
 
 
 
