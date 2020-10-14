@@ -24,7 +24,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <Router basename={"/cloud-movie-frontend"}>
+    <Router>
       <Navbar />
       <Switch>
         <Route exact path="/">
