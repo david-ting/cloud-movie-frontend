@@ -73,7 +73,7 @@ function Carousel({ type, slides, autoplay }) {
   return (
     <div className="mt-2">
       <Slider ref={slider} {...settings}>
-        {slides.map((slide, i, arr) => {
+        {slides.map((slide) => {
           let path = null;
           if (slide.poster_path) {
             path = slide.poster_path;
@@ -87,7 +87,16 @@ function Carousel({ type, slides, autoplay }) {
           return (
             <div className="slick-slide" key={slide.id}>
               <Link to={`/${type}/detail/${slide.id}`}>
-                <img className={`img-fadeIn img-${type}`} src={imgPath}></img>
+                {imgPath ? (
+                  <img className={`img-fadeIn img-${type}`} src={imgPath}></img>
+                ) : (
+                  <span className="slickPlaceholder">
+                    <span>
+                      {type === "movie" && slide.title}
+                      {(type === "tv" || type === "person") && slide.name}
+                    </span>
+                  </span>
+                )}
               </Link>
             </div>
           );

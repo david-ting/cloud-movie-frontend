@@ -1,37 +1,45 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function TwoWayToggle({ current, setCurrent, selections, callBack }) {
+function TwoWayToggle({ current, path, selections, callBack }) {
   const slideOver = useRef();
+
+  useEffect(() => {
+    if (current === selections[0]) {
+      slideOver.current.style.left = "0px";
+    } else if (current === selections[1]) {
+      slideOver.current.style.left = "70px";
+    }
+  }, [current, selections]);
+
   return (
     <div className="slideButtonGroup">
-      <button
+      <Link
+        to={`${path}/${selections[0]}`}
         className={`slideButton ${
           current === selections[0] && "slideButton-active"
         }`}
         onClick={() => {
           if (current !== selections[0]) {
-            setCurrent(selections[0]);
-            slideOver.current.classList.toggle("slideOver-clicked");
             callBack();
           }
         }}
       >
         {selections[0]}
-      </button>
-      <button
+      </Link>
+      <Link
+        to={`${path}/${selections[1]}`}
         className={`slideButton ${
           current === selections[1] && "slideButton-active"
         }`}
         onClick={() => {
           if (current !== selections[1]) {
-            setCurrent(selections[1]);
-            slideOver.current.classList.toggle("slideOver-clicked");
             callBack();
           }
         }}
       >
         {selections[1]}
-      </button>
+      </Link>
       <button className="slideOver" ref={slideOver}></button>
     </div>
   );

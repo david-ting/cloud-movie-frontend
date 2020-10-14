@@ -22,7 +22,7 @@ function ReviewPage() {
   return (
     <DetailProvider>
       <DetailSubRoute>
-        {reviews && <ReviewCards type={type} reviews={reviews} />}
+        <div className="mb-3">{reviews && <ReviewCards type={type} reviews={reviews} />}</div>
         {reviews && reviews.pageInfo && (
           <ReviewPagination
             {...{

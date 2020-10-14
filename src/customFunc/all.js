@@ -14,6 +14,10 @@ export function formatNumber(number) {
   }
 }
 
+export function capitalizeFirstChar(str) {
+  return str[0].toUpperCase() + str.slice(1);
+}
+
 let fetchPrefix;
 
 if (process.env.NODE_ENV === "development") {
@@ -21,8 +25,10 @@ if (process.env.NODE_ENV === "development") {
 } else {
   fetchPrefix = "https://cloud-movie-backend.herokuapp.com";
 }
+/* 
+fetchPrefix = "https://cloud-movie-backend.herokuapp.com"; */
 
-export function searchOneType(type, name, page, dispatch) {
+export function searchOneType(type, name, page, dispatch, setSuggestions) {
   // if (name !== "") {
   fetch(`${fetchPrefix}/searchOneType/${type}/${name}/${page}`)
     .then((res) => {
@@ -34,18 +40,22 @@ export function searchOneType(type, name, page, dispatch) {
     })
     .then((data) => {
       console.log(data);
-      dispatch({
-        type: "SET_LIST",
-        payload: data.results,
-      });
-      dispatch({
-        type: "SET_PAGE_INFO",
-        payload: {
-          totalPages: data.total_pages,
-          page: data.page,
-          totalResults: data.total_results,
-        },
-      });
+      if (dispatch !== false) {
+        dispatch({
+          type: "SET_LIST",
+          payload: data.results,
+        });
+        dispatch({
+          type: "SET_PAGE_INFO",
+          payload: {
+            totalPages: data.total_pages,
+            page: data.page,
+            totalResults: data.total_results,
+          },
+        });
+      } else {
+        setSuggestions(data.results);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -158,6 +168,22 @@ export function fetchTrending(type, timeWindow, setSlides) {
 
 export function fetchSingleReview(reviewID, setSingleReview) {
   fetch(`${fetchPrefix}/fetchSingleReview/${reviewID}`)
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error(response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setSingleReview(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export function scrapeSingleReview(reviewID, setSingleReview) {
+  fetch(`${fetchPrefix}/scrapeSingleReview/${reviewID}`)
     .then((response) => {
       if (response.status !== 200) {
         throw new Error(response.status);

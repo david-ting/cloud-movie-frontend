@@ -5,6 +5,7 @@ import { BsPersonSquare } from "react-icons/bs";
 import CardImage from "../CardImage";
 import { SearchContext } from "../../context/search/SearchProvider";
 import { searchOneType } from "../../customFunc/all";
+import LoadingIndicator from "../LoadingIndicator";
 
 function PersonResults() {
   console.log("PersonResults");
@@ -27,26 +28,34 @@ function PersonResults() {
       </div>
       <div className="personCardInfoWrapper">
         <h5>
-          <Link to={`/person/detail/${person.id}`}>{person.name}</Link>
+          <Link to={`/person/detail/${person.id}`} className="themeColorText">
+            {person.name}
+          </Link>
         </h5>
-        <p>
-          <i>{person.known_for_department}</i>
-          {person.known_for.map((a) => {
-            if (a.title)
-              return (
-                <Link
-                  to={`/movie/detail/${a.id}`}
-                  key={a.id}
-                >{`● ${a.title}`}</Link>
-              );
-            else if (a.name)
-              return (
-                <Link
-                  to={`/tv/detail/${a.id}`}
-                  key={a.id}
-                >{`● ${a.name}`}</Link>
-              );
-          })}
+        <p className="d-flex flex-wrap">
+          <i className="mr-2 themeLigherColorText">
+            {person.known_for_department}
+          </i>
+          <span className="d-flex flex-wrap">
+            {person.known_for.map((a) => {
+              if (a.title)
+                return (
+                  <Link
+                    className="mr-2"
+                    to={`/movie/detail/${a.id}`}
+                    key={a.id}
+                  >{`● ${a.title}`}</Link>
+                );
+              else if (a.name)
+                return (
+                  <Link
+                    className="mr-2"
+                    to={`/tv/detail/${a.id}`}
+                    key={a.id}
+                  >{`● ${a.name}`}</Link>
+                );
+            })}
+          </span>
         </p>
       </div>
     </div>
@@ -58,8 +67,9 @@ function PersonResults() {
 
   return (
     <div className="container">
+      {list.length === 0 && <LoadingIndicator />}
       <IconContext.Provider value={{ color: "gray", size: "5rem" }}>
-        {cards}
+        <div className="mb-3">{cards}</div>
       </IconContext.Provider>
     </div>
   );

@@ -1,10 +1,26 @@
 import React from "react";
 import ColorThief from "colorthief";
 import { AiTwotoneHome } from "react-icons/ai";
+import { formatDate } from "../../customFunc/all";
 
 const colorThief = new ColorThief();
 
 function Movie_TV_Content({ type, result, setMainColor }) {
+  let duration;
+  switch (type) {
+    case "movie":
+      duration = result.runtime;
+      break;
+    case "tv":
+      duration = result.episode_run_time[0];
+      break;
+    default:
+      break;
+  }
+
+  const hour = Math.floor(duration / 60);
+  const minute = duration % 60;
+
   return (
     <div id="movieTvContent">
       {result.poster_path && (
@@ -21,33 +37,45 @@ function Movie_TV_Content({ type, result, setMainColor }) {
           crossOrigin="anonymous"
         ></img>
       )}
-      <div id="movieTvInfo">
-        <h3>
-          {type === "movie" && result.title}
-          {type === "tv" && result.name}
-        </h3>
-        <p>
-          <span className="mr-5">
-            {type === "movie" && `● release: ${result.release_date}`}
-            {type === "tv" && `● first air: ${result.first_air_date}`}
-          </span>
-          <span>
-            {type === "movie" &&
-              `● duration: ${Math.floor(result.runtime / 60)} h
-            ${result.runtime % 60} m`}
-            {type === "tv" &&
-              `● runtime: ${Math.floor(result.episode_run_time[0] / 60)} h
-            ${result.episode_run_time[0] % 60} m`}
-          </span>
+      <div
+        id="movieTvInfo"
+        style={
+          result.poster_path
+            ? null
+            : {
+                gridColumn: "1/3",
+              }
+        }
+      >
+        {(result.title || result.name) && (
+          <h3>{result.title || result.name}</h3>
+        )}
+        <p className="d-flex flex-wrap">
+          {(result.release_date || result.first_air_date) && (
+            <span className="mr-5">
+              {type === "movie" &&
+                `● release: ${formatDate(result.release_date)}`}
+              {type === "tv" &&
+                `● first air: ${formatDate(result.first_air_date)}`}
+            </span>
+          )}
+          {duration !== 0 && duration !== undefined && duration !== null && (
+            <span>
+              ● duration:{hour !== 0 && ` ${hour} h`}
+              {minute !== 0 && ` ${minute} m`}
+            </span>
+          )}
         </p>
-        <p>
-          {result.genres.reduce((string, genre) => {
-            if (string === "") return genre.name;
-            else {
-              return `${string}, ${genre.name}`;
-            }
-          }, "")}
-        </p>
+        {result.genres && result.genres.length >= 1 && (
+          <p>
+            {result.genres.reduce((string, genre) => {
+              if (string === "") return genre.name;
+              else {
+                return `${string}, ${genre.name}`;
+              }
+            }, "")}
+          </p>
+        )}
         {result.tagline && (
           <p>
             <i>{result.tagline}</i>
@@ -58,9 +86,13 @@ function Movie_TV_Content({ type, result, setMainColor }) {
             <AiTwotoneHome className="mr-2" /> {result.homepage}
           </a>
         )}
-        <h5 className="mt-2">Overview</h5>
-        <p>{result.overview}</p>
-        {result.production_companies && (
+        {result.overview && (
+          <>
+            <h5 className="mt-2">Overview</h5>
+            <p>{result.overview}</p>
+          </>
+        )}
+        {result.production_companies.length > 0 && (
           <>
             <h5 className="mt-2">Production Company</h5>
             <ul>

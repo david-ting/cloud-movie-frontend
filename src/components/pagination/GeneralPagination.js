@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { getActualWidthforFlexbox } from "../../customFunc/all";
+import NumberDropDown from "../NumberDropDown";
 
 function GeneralPagination(props) {
   const { currentPage, totalPages, path } = props;
+  const pagination = useRef();
+  const dropup = useRef();
 
   const previousPath = `${path}/${
     currentPage === 1 ? currentPage : currentPage - 1
@@ -73,22 +77,55 @@ function GeneralPagination(props) {
       );
     }
   }
+
   return (
-    <nav aria-label="Page navigation example">
-      <ul className="pagination justify-content-center">
-        <li className="page-item">
-          <Link className="page-link" aria-label="Previous" to={previousPath}>
-            <span aria-hidden="true">&laquo;</span>
-          </Link>
-        </li>
-        {pagesHTML}
-        <li className="page-item">
-          <Link className="page-link" aria-label="Next" to={nextPath}>
-            <span aria-hidden="true">&raquo;</span>
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <div className="paginationWrapper">
+      <div
+        className="d-flex flex-column align-items-center dropup mb-3"
+        ref={dropup}
+      >
+        {totalPages > 0 && (
+          <>
+            <NumberDropDown
+              range={totalPages}
+              value={currentPage}
+              path={path}
+              direction="dropup"
+            />
+            <p className="themeLigherColorText pt-1">
+              <b>{`Total Pages: ${totalPages}`}</b>
+            </p>
+          </>
+        )}
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul
+          className="pagination d-flex justify-content-center"
+          ref={pagination}
+        >
+          {" "}
+          {pagesHTML.length > 0 && (
+            <>
+              <li className="page-item">
+                <Link
+                  className="page-link"
+                  aria-label="Previous"
+                  to={previousPath}
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </Link>
+              </li>
+              {pagesHTML}
+              <li className="page-item">
+                <Link className="page-link" aria-label="Next" to={nextPath}>
+                  <span aria-hidden="true">&raquo;</span>
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

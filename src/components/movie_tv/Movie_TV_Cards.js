@@ -2,12 +2,13 @@ import React from "react";
 import { MdLocalMovies } from "react-icons/md";
 import CardImage from "../CardImage";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../customFunc/all";
 
 function Movie_TV_Cards({ list, type }) {
   return (
     <>
       {list.map((result) => (
-        <div className="col mb-4" key={result.id}>
+        <div className="col mb-4 px-2" key={result.id}>
           <div className="card h-100">
             {!result.poster_path ? (
               <div
@@ -37,12 +38,18 @@ function Movie_TV_Cards({ list, type }) {
                 {type === "tv" && result.name}
               </h5>
               <p className="card-text">
-                {type === "movie" &&
-                  result.release_date &&
-                  `Release date:${result.release_date}`}
-                {type === "tv" &&
-                  result.first_air_date &&
-                  `First air date:${result.first_air_date}`}
+                {type === "movie" && result.release_date && (
+                  <span className="d-flex flex-wrap">
+                    <span className="mr-2">Release date: </span>
+                    <span>{formatDate(result.release_date)}</span>
+                  </span>
+                )}
+                {type === "tv" && result.first_air_date && (
+                  <span className="d-flex flex-wrap">
+                    <span className="mr-2">First air date: </span>
+                    <span>{formatDate(result.first_air_date)}</span>
+                  </span>
+                )}
               </p>
               <Link
                 to={`/${type}/detail/${result.id}`}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import VideoList from "../components/VideoList";
@@ -13,6 +13,8 @@ import {
   fetchRecommendationsFunc,
 } from "../customFunc/all";
 import Movie_TV_Content from "../components/movie_tv/Movie_TV_Content";
+import LoadingPage from "../components/LoadingPage";
+import { capitalizeFirstChar } from "../customFunc/all";
 
 const DetailContainer = styled.div`
   &::before {
@@ -20,13 +22,13 @@ const DetailContainer = styled.div`
   }
   &::after {
     background-color: ${(props) => {
-      console.log(props);
       return `rgba(${props.mainColor[0]}, ${props.mainColor[1]}, ${props.mainColor[2]}, 0.8)`;
     }};
   }
 `;
 function MovieTvDetailPage({ type }) {
   const { id } = useParams();
+  console.log(id);
   const { detail, dispatch } = useContext(DetailContext);
   const result = detail.result;
 
@@ -37,6 +39,7 @@ function MovieTvDetailPage({ type }) {
   const [recommendations, setRecommendations] = useState();
 
   useEffect(() => {
+    setMainColor([80, 80, 80]);
     dispatch({
       type: "SET_TARGET_ID",
       payload: id,
@@ -47,8 +50,28 @@ function MovieTvDetailPage({ type }) {
     fetchRecommendationsFunc(type, id, setRecommendations);
   }, [id, dispatch, type]);
 
+  useEffect(() => {
+    let display;
+    switch (type) {
+      case "movie":
+        display = result.title;
+        break;
+      case "tv":
+        display = result.name;
+        break;
+      default:
+        break;
+    }
+    if (!display) display = "";
+    document.title = `${display} - ${capitalizeFirstChar(type)} | Cloud Movie`;
+  }, [type, result]);
+
   return (
     <>
+      {(Object.keys(result).length === 0 ||
+        !videos ||
+        !reviews ||
+        !recommendations) && <LoadingPage />}
       <IconContext.Provider value={{ size: "1.5rem" }}>
         {Object.keys(result).length === 0 ? null : (
           <DetailContainer
@@ -65,7 +88,7 @@ function MovieTvDetailPage({ type }) {
         )}
 
         <div id="movieTvRelatedInfo">
-          {videos && (
+          {videos && videos.length > 0 && (
             <VideoList
               type={type}
               videos={videos}
@@ -76,7 +99,7 @@ function MovieTvDetailPage({ type }) {
           {reviews && reviews.results.length > 0 && (
             <ReviewList type={type} reviews={reviews} detail={detail} />
           )}
-          {recommendations && recommendations.results.length >= 1 && (
+          {recommendations && recommendations.results.length > 0 && (
             <Recommendations type={type} recommendations={recommendations} />
           )}
         </div>

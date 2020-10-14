@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useContext } from "react";
-
 import { useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { FaLink } from "react-icons/fa";
@@ -30,6 +29,8 @@ function PersonDetailPage() {
   }, [dispatch, id]);
 
   useEffect(() => {
+    if (!biographyContainer.current) return;
+
     if (
       biographyContainer.current.offsetHeight >=
       biographyContainer.current.scrollHeight
@@ -42,6 +43,10 @@ function PersonDetailPage() {
     }
   }, [detail]);
 
+  useEffect(() => {
+    document.title = `${result.name ? result.name : ""} - Person | Cloud Movie`;
+  }, [result]);
+
   return (
     <IconContext.Provider value={{ color: "gray", size: "1.5rem" }}>
       <div className="container" id="personWrapper">
@@ -51,7 +56,10 @@ function PersonDetailPage() {
             alt={result.name}
           ></img>
         )}
-        <div id="personInfo">
+        <div
+          id="personInfo"
+          style={result.profile_path ? null : { gridColumn: "1/3" }}
+        >
           <h3>{result.name}</h3>
           {result.also_known_as && result.also_known_as.length !== 0 && (
             <p className="text-secondary">
@@ -72,23 +80,25 @@ function PersonDetailPage() {
             {result.birthday && <p className="mr-3">Born: {result.birthday}</p>}
             {result.deathday && <p>Died: {result.deathday}</p>}
           </div>
-          <div id="biographyContainer" ref={biographyContainer}>
-            <h4>Biography</h4>
-            <p>{result.biography}</p>
-            {
-              <>
-                <button
-                  ref={readMoreBtn}
-                  className="btn btn-primary"
-                  htmlFor="expanded"
-                  onClick={readMore}
-                >
-                  read more
-                </button>
-                <div className="whiteFilter" ref={whiteFilter}></div>
-              </>
-            }
-          </div>
+          {result.biography && (
+            <div id="biographyContainer" ref={biographyContainer}>
+              <h4>Biography</h4>
+              <p>{result.biography}</p>
+              {
+                <>
+                  <button
+                    ref={readMoreBtn}
+                    className="btn btn-primary"
+                    htmlFor="expanded"
+                    onClick={readMore}
+                  >
+                    read more
+                  </button>
+                  <div className="whiteFilter" ref={whiteFilter}></div>
+                </>
+              }
+            </div>
+          )}
         </div>
       </div>
     </IconContext.Provider>

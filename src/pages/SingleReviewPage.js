@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import DetailSubRoute from "../components/DetailSubRoute";
 import Review from "../components/Review";
-import { fetchSingleReview } from "../customFunc/all";
+import { fetchSingleReview, scrapeSingleReview } from "../customFunc/all";
 import DetailProvider from "../context/detail/DetailProvider";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 function SingleReviewPage() {
   const { type } = useParams();
@@ -12,12 +13,16 @@ function SingleReviewPage() {
   const [singleReview, setSingleReview] = useState();
 
   useEffect(() => {
-    fetchSingleReview(reviewID, setSingleReview);
-  }, [reviewID]);
+    if (type === "movie") fetchSingleReview(reviewID, setSingleReview);
+    else if (type === "tv") {
+      scrapeSingleReview(reviewID, setSingleReview);
+    }
+  }, [reviewID, type]);
 
   return (
     <DetailProvider>
       <DetailSubRoute>
+        {!singleReview && <LoadingIndicator />}
         {singleReview && (
           <div className="my-3">
             <Review type={type} review={singleReview} full={true} />

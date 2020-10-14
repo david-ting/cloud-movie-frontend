@@ -1,14 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NumberDropDown({ range, value, path, setValue }) {
+function NumberDropDown({
+  range,
+  value,
+  path,
+  direction = "dropdown",
+  postfix = "",
+}) {
   let numList = [];
   for (let i = 1; i < range + 1; i++) {
     numList.push(
       <Link
         key={i}
         className={`dropdown-item ${value === i ? "active" : null}`}
-        to={`${path}/${i}/1`}
+        style={{ paddingLeft: "20px", paddingRight: "20px" }}
+        to={`${path}/${i}${postfix ? `/${postfix}` : ""}`}
       >
         {i}
       </Link>
@@ -16,7 +23,7 @@ function NumberDropDown({ range, value, path, setValue }) {
   }
 
   return (
-    <div className="dropdown d-flex justify-content-end mt-2">
+    <div className={`${direction}`}>
       <button
         className="btn btn-secondary dropdown-toggle"
         type="button"
@@ -27,7 +34,11 @@ function NumberDropDown({ range, value, path, setValue }) {
       >
         {value}
       </button>
-      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <div
+        className="dropdown-menu"
+        aria-labelledby="dropdownMenuButton"
+        style={{ minWidth: "30px", maxHeight: "200px", overflow: "auto" }}
+      >
         {numList}
       </div>
     </div>

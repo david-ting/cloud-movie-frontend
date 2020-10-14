@@ -7,6 +7,7 @@ import {
   formatDate,
   formatNumber,
 } from "../customFunc/all";
+import LoadingIndicator from "./LoadingIndicator";
 
 function VideoCards({ videos }) {
   const [videosDetail, setVideosDetail] = useState();
@@ -26,6 +27,9 @@ function VideoCards({ videos }) {
 
   return (
     <>
+      {(!videosDetail || videosDetail.length !== videos.length) && (
+        <LoadingIndicator />
+      )}
       {videosDetail &&
         videosDetail.length === videos.length &&
         videos.map((video, index) => {

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,7 +13,6 @@ import MatchedTv from "./pages/tv/MatchedTv";
 import SearchPerson from "./pages/person/SearchPerson";
 import MatchedPeople from "./pages/person/MatchedPeople";
 import DetailProvider from "./context/detail/DetailProvider";
-import MatchedReviews from "./pages/ReviewPage";
 import VideoPage from "./pages/VideoPage";
 import ReviewPage from "./pages/ReviewPage";
 import SingleReviewPage from "./pages/SingleReviewPage";
@@ -28,7 +27,10 @@ function App() {
     <Router basename={"/cloud-movie-frontend"}>
       <Navbar />
       <Switch>
-        <Route path="/" exact>
+        <Route exact path="/">
+          <Redirect to="/trending/week" />
+        </Route>
+        <Route path="/trending/:time" exact>
           <HomePage />
         </Route>
 

@@ -6,26 +6,6 @@
 $themeColor: rgb(33, 99, 214);
 $themeLighterColor: rgb(25, 109, 154);
 
-// @mixin anchor-white {
-//   &:link,
-//   &:visited,
-//   &:hover,
-//   &:active {
-//     text-decoration: none;
-//     color: white;
-//   }
-// }
-
-// @mixin anchor-black {
-//   &:link,
-//   &:visited,
-//   &:hover,
-//   &:active {
-//     text-decoration: none;
-//     color: black;
-//   }
-// }
-
 * {
   box-sizing: border-box;
 }
@@ -35,6 +15,91 @@ body {
   background-color: rgb(255, 255, 255);
   padding: 50px 0 50px 0;
   position: relative;
+}
+
+.themeColorText {
+  color: $themeColor !important;
+}
+
+.themeLigherColorText {
+  color: $themeLighterColor !important;
+}
+
+#loadingPage {
+  position: absolute;
+  background-color: rgba(84, 85, 89, 0.95);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: white !important;
+  }
+  div:nth-child(2) {
+    font-size: 1.5rem;
+  }
+}
+
+.cloudBackground {
+  height: 100%;
+  padding-bottom: 1px;
+  display: relative;
+  &::after {
+    content: "";
+    background-image: url("../image/cloud_bg.jpg");
+    background-repeat: repeat;
+    opacity: 0.35;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.searchJumbotron {
+  background-color: rgba(185, 172, 172, 0.5);
+  border-radius: 10px;
+  width: 100%;
+}
+
+.searchGroup {
+  position: relative;
+  .autocompleteWrapper {
+    list-style-type: none;
+    padding: 0;
+    background-color: white;
+    position: absolute;
+    top: 38px;
+    width: calc(100% - 40px);
+    max-height: 200px;
+    overflow: auto;
+    border: 2px solid $themeColor;
+    border-radius: 0 0 10px 10px;
+    z-index: 1000;
+    a {
+      @include anchor-black;
+      padding: 2px 10px;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: rgba(206, 209, 217, 0);
+      border-bottom: 1px solid $themeColor;
+      &:hover {
+        background-color: $themeColor;
+        color: white;
+      }
+    }
+  }
 }
 
 #mainContainer {
@@ -62,16 +127,17 @@ body {
   color: white;
   height: 50px;
   width: 100%;
-  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100000;
   span,
   a {
     margin-right: 6px;
     @include anchor-white;
   }
 }
+
 .slideButtonGroup {
   width: 150px;
   height: 30px;
@@ -79,6 +145,13 @@ body {
   border-radius: 50px;
   display: inline-block;
   position: relative;
+  background-color: white;
+
+  .slideButton {
+    @include anchor-black;
+    text-align: center;
+    display: block;
+  }
 
   .slideButton,
   .slideOver {
@@ -93,24 +166,19 @@ body {
       outline: none;
     }
   }
-  .slideOver {
-    height: 28.5px;
-  }
   .slideButton-active {
-    color: white;
+    @include anchor-white;
     transition-delay: 0.2s;
+    z-index: 1;
   }
   .slideButton:nth-child(2) {
     left: 70px;
   }
   .slideOver {
+    height: 28.5px;
+    z-index: 0;
     background: $themeColor;
-    left: 0;
     transition: left 0.2s linear;
-    z-index: -1000;
-  }
-  .slideOver-clicked {
-    left: 70px;
   }
 }
 
@@ -181,15 +249,20 @@ body {
   }
 }
 
-@keyframes fadeOutIn {
-  0% {
-    opacity: 1;
+.paginationWrapper {
+  .dropup {
+    display: none !important;
   }
-  50% {
-    opacity: 0;
+  nav {
+    display: block;
   }
-  100% {
-    opacity: 1;
+  @media only screen and (max-width: 600px) {
+    .dropup {
+      display: flex !important;
+    }
+    nav {
+      display: none;
+    }
   }
 }
 
@@ -205,12 +278,32 @@ body {
     text-align: center;
     border: 5px solid rgba(255, 255, 255, 0);
     max-width: 300px;
+    a {
+      display: block;
+      background-color: gray;
+      @include anchor-white;
+      font-size: 1.1rem;
+    }
     img {
       width: 100%;
       object-fit: contain;
     }
     .img-fadeIn {
       animation: fadeIn 2.5s;
+    }
+    .slickPlaceholder {
+      display: block;
+      height: 0;
+      padding-bottom: 150%;
+      position: relative;
+      span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
   .slick-slider {
@@ -276,7 +369,7 @@ body {
 
 .videoWrapper,
 .carouselWrapper {
-  margin-top: 16px;
+  padding-top: 16px;
 }
 .videoWrapper {
   display: flex;
@@ -301,7 +394,8 @@ body {
   max-height: 200px;
   position: relative;
   overflow: hidden;
-  a {
+
+  .readMore {
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -321,6 +415,10 @@ body {
     );
     z-index: 1000;
   }
+}
+
+.reviewAuthor {
+  @include anchor-black;
 }
 
 .grayBorderWrapper {

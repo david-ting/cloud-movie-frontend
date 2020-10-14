@@ -25,27 +25,41 @@ function VideoPage() {
       console.log("video fetch required");
       fetchVideosFunc(type, id, setVideos);
     }
+    window.onload = function () {
+      console.log("loading complete");
+    };
   }, [type, id, setVideos, linkVideos]);
 
   return (
     <DetailProvider>
       <DetailSubRoute>
+        {/*       {!videos && (
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        )} */}
         {videos && (
-          <NumberDropDown
-            range={Math.min(videos.length, 10)}
-            value={numberPerPage}
-            path={`/${type}/detail/${id}/videos`}
-          />
-        )}
-        {videos && <VideoCards videos={videos.slice(from, to + 1)} />}
-        {videos && (
-          <VideoPagination
-            type={type}
-            id={id}
-            total={videos.length}
-            numberPerPage={numberPerPage}
-            currentPage={currentPage}
-          />
+          <>
+            <div className="d-flex mt-3 justify-content-end align-items-center">
+              <p className="my-0 pr-3 themeLigherColorText">
+                <b>Videos per page</b>{" "}
+              </p>
+              <NumberDropDown
+                range={Math.min(videos.length, 10)}
+                value={numberPerPage}
+                path={`/${type}/detail/${id}/videos`}
+                postfix="1"
+              />
+            </div>
+            <VideoCards videos={videos.slice(from, to + 1)} />
+            <VideoPagination
+              type={type}
+              id={id}
+              total={videos.length}
+              numberPerPage={numberPerPage}
+              currentPage={currentPage}
+            />
+          </>
         )}
       </DetailSubRoute>
     </DetailProvider>

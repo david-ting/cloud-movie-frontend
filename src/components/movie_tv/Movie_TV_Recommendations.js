@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import Movie_TV_Cards from "./Movie_TV_Cards";
 import { fetchRecommendationsFunc } from "../../customFunc/all";
 import RecommendationPagination from "../pagination/RecommendationPagination";
+import LoadingIndicator from "../LoadingIndicator";
 
 function Movie_TV_Recommendations() {
   const { type, id, page } = useParams();
@@ -20,10 +21,12 @@ function Movie_TV_Recommendations() {
   return (
     <>
       <IconContext.Provider value={{ size: "5rem" }}>
-        {!list ? null : (
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 - row-cols-lg-5">
+        {list ? (
+          <div className="mt-3 row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5">
             <Movie_TV_Cards list={list} type={type} />
           </div>
+        ) : (
+          <LoadingIndicator />
         )}
         {recommendations && recommendations.pageInfo && (
           <RecommendationPagination

@@ -20,7 +20,7 @@ function ReviewList({ type, reviews, detail }) {
           </Link>
         )}
       </h5>
-      <Review type={type} review={reviews.results[0]} />
+      <Review type={type} review={reviews.results[0]} full={false} />
     </>
   );
 }
