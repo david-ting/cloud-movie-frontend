@@ -18,6 +18,7 @@ Youtube API is used to get the statistics of the videos, such as published date,
 It is built with <a href="https://reactjs.org/"><b>React<b></a> and the <a href="https://reactjs.org/docs/create-a-new-react-app.html"><b>Create React App</b> boilerplate.
 
 <b>Library</b>
+
 • <a href="https://www.npmjs.com/package/react-slick">react-slick</a>
 Create carousel for displaying movie & tv posters and celebrity images.
 
