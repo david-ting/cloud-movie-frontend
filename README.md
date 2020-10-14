@@ -10,7 +10,7 @@ live demo: https://cloud-movie.herokuapp.com/
 
 It makes use of the TMDb API the for providing users with up-to-date and reliable information about movies, tv shows and celebrities. 
 
-• <a href="https://developers.google.com/youtube/v3/docs/><b>Youtube API</b></a>
+• <a href="https://developers.google.com/youtube/v3/docs/"><b>Youtube API</b></a>
 
 The TMDb API could provide the links for the youtube videos related to the movies and tv. To enrich the information of the videos, 
 Youtube API is used to get the statistics of the videos, such as published date, view count, like count and dislike count. 
