@@ -1,6 +1,6 @@
 # :cloud: cloud-movie-frontend
 
-The project has been published to heroku. :star: Live demo: https://cloud-movie.herokuapp.com/
+The project has been published to heroku. :star: Live demo: [**https://cloud-movie.herokuapp.com/**]
 
 The api requests and web scraping are made by the [**cloud-movie-backend**](https://github.com/david-ting/cloud-movie-backend). 
 
