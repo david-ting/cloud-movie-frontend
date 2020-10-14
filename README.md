@@ -1,10 +1,6 @@
 # cloud-movie-frontend
 
-<p>
-The project has been published to heroku.
-
-live demo: https://cloud-movie.herokuapp.com/
-</p>
+The project has been published to heroku. Live demo: https://cloud-movie.herokuapp.com/
 
 <h3>API</h3>
 
