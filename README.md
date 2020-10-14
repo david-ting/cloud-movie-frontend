@@ -20,7 +20,7 @@ Youtube API is used to get the statistics of the videos, such as published date,
 
 ### Libraries
 
-It is built with [**React**](https://reactjs.org/) and the [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate. Some other cool libraies are also used
+It is built with [**React**](https://reactjs.org/), [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html) boilerplate and [**Bootstrap**](https://getbootstrap.com/). Some other cool libraies are also used
 
   • [**react-router**](https://www.npmjs.com/package/react-router)
   Create client-side routing for the single page application
