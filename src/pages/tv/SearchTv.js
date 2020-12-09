@@ -11,7 +11,7 @@ function SearchTv() {
     <SearchProvider>
       <div
         style={{
-          backgroundImage: `url(${tv_bg})`,
+          backgroundImage: `url(https://res.cloudinary.com/dmskcaysu/image/upload/v1607491505/cloud%20movie/tv_bg_anpkpl.jpg)`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",

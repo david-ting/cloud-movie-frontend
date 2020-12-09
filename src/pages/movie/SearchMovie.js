@@ -11,7 +11,7 @@ function SearchMovie() {
     <SearchProvider>
       <div
         style={{
-          backgroundImage: `url(${movie_bg})`,
+          backgroundImage: `url(https://res.cloudinary.com/dmskcaysu/image/upload/v1607491491/cloud%20movie/movie_bg_qlefad.jpg)`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "top 50px",
           backgroundSize: "cover",

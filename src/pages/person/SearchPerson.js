@@ -11,7 +11,7 @@ function SearchPerson() {
     <SearchProvider>
       <div
         style={{
-          backgroundImage: `url(${person_bg})`,
+          backgroundImage: `url(https://res.cloudinary.com/dmskcaysu/image/upload/v1607491496/cloud%20movie/person_bg_ipcqdx.jpg)`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
