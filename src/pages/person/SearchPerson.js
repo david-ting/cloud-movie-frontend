@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SearchProvider from "../../context/search/SearchProvider";
 import SearchJumbotron from "../../components/SearchJumbotron";
-import person_bg from "../../image/person_bg.jpg";
+import person_bg from "../../image/person_bg-min.jpg";
 
 function SearchPerson() {
   useEffect(() => {
