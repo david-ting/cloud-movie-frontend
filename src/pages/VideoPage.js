@@ -22,22 +22,13 @@ function VideoPage() {
 
   useEffect(() => {
     if (!linkVideos) {
-      console.log("video fetch required");
       fetchVideosFunc(type, id, setVideos);
     }
-    window.onload = function () {
-      console.log("loading complete");
-    };
   }, [type, id, setVideos, linkVideos]);
 
   return (
     <DetailProvider>
       <DetailSubRoute>
-        {/*       {!videos && (
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        )} */}
         {videos && (
           <>
             <div className="d-flex mt-3 justify-content-end align-items-center">

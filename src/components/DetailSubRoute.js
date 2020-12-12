@@ -14,7 +14,6 @@ function DetailSubRoute(props) {
   useEffect(() => {
     if (detail.targetID === "" && Object.keys(detail.result).length === 0) {
       if (linkDetail) {
-        console.log("update through link");
         dispatch({
           type: "SET_TARGET_ID",
           payload: linkDetail.targetID,
@@ -24,7 +23,6 @@ function DetailSubRoute(props) {
           payload: linkDetail.result,
         });
       } else {
-        console.log("update through fetch");
         dispatch({
           type: "SET_TARGET_ID",
           payload: id,

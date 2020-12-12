@@ -26,9 +26,6 @@ function SearchJumbotron(props) {
       ? `/${type}/search/`
       : `/${type}/search/${encodeURIComponent(search.query)}/1`;
 
-  console.log(encodeURIComponent(search.query));
-  console.log(toPath);
-
   const changeHandler = (event) => {
     dispatch({
       type: "SET_QUERY",

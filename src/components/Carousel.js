@@ -1,24 +1,22 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function Carousel({ type, slides, autoplay }) {
-  console.log("autoplay");
-  console.log(autoplay);
   const slider = useRef();
 
-  const settings = {
+  const [settings, setSettings] = useState({
     arrows: true,
     dots: true,
     infinite: true,
     slidesToShow: Math.min(slides.length, 5),
     slidesToScroll: Math.min(slides.length, 5),
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     pauseHover: true,
-    speed: 3000,
+    speed: 1000,
     //cssEase: "linear",
     responsive: [
       {
@@ -46,29 +44,27 @@ function Carousel({ type, slides, autoplay }) {
         },
       },
     ],
-  };
+  });
 
   useEffect(() => {
+    let timeout;
     if (slider.current) {
-      if (autoplay) slider.current.slickPlay();
-      else {
+      if (autoplay) {
+        setSettings((prev) => ({ ...prev, autoplaySpeed: 100 }));
+        slider.current.slickPlay();
+        timeout = setTimeout(() => {
+          setSettings((prev) => ({ ...prev, autoplaySpeed: 5000 }));
+        }, 1000);
+      } else {
         if (slider.current && slider.current.style)
           slider.current.style.transition = "none";
         slider.current.slickPause();
       }
     }
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [autoplay]);
-
-  // useEffect(() => {
-  //   function removeFadeClasses() {
-  //     const images = document.querySelectorAll("img");
-  //     images.forEach((image) => {
-  //       image.classList.toggle("img-fadeIn");
-  //       image.classList.toggle("img-fadeOutIn");
-  //     });
-  //   }
-  //   setTimeout(removeFadeClasses, 5000);
-  // }, [slides]);
 
   return (
     <div className="mt-2">
@@ -108,7 +104,6 @@ function Carousel({ type, slides, autoplay }) {
 
 function areEqual(prevProps, nextProps) {
   if (prevProps.slides.length !== nextProps.slides.length) {
-    console.log("1");
     return false;
   }
 
@@ -122,11 +117,9 @@ function areEqual(prevProps, nextProps) {
   });
 
   if (equal) {
-    console.log("2");
     return true;
   }
 
-  console.log("3");
   return false;
 }
 

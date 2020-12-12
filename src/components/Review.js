@@ -10,8 +10,6 @@ function Review({ type, review, full }) {
   const readMore = useRef();
 
   useEffect(() => {
-    console.log(reviewContainer.current.offsetHeight);
-    console.log(reviewContainer.current.scrollHeight);
     if (!full) {
       if (
         reviewContainer.current.offsetHeight >=

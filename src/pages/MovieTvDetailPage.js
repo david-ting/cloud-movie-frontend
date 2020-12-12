@@ -28,7 +28,6 @@ const DetailContainer = styled.div`
 `;
 function MovieTvDetailPage({ type }) {
   const { id } = useParams();
-  console.log(id);
   const { detail, dispatch } = useContext(DetailContext);
   const result = detail.result;
 

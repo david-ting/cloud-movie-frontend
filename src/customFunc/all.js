@@ -62,7 +62,6 @@ export function suggestOneType(
   setSuggestions,
   abortController
 ) {
-  console.log(name);
   fetch(`${fetchPrefix}/searchOneType/${type}/${name}/${page}`, {
     signal: abortController.signal,
   })
