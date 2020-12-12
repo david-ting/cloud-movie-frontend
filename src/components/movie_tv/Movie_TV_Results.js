@@ -32,7 +32,7 @@ function Movie_TV_Results(props) {
               <p>Please try another words or check your spelling.</p>
             </div>
           ) : (
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5">
+            <div className="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-5">
               {list.map((result) => (
                 <Movie_TV_Card key={result.id} result={result} type={type} />
               ))}
