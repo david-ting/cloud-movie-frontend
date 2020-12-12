@@ -1,0 +1,44 @@
+.carouselWrapper {
+  padding: 0 30px 0 30px;
+  .slick-prev:before,
+  .slick-next:before {
+    color: rgb(132, 123, 150);
+  }
+
+  .slick-slide {
+    background-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    border: 5px solid rgba(255, 255, 255, 0);
+    max-width: 300px;
+    a {
+      display: block;
+      background-color: gray;
+      @include anchor-white;
+      font-size: 1.1rem;
+    }
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+    .img-fadeIn {
+      animation: fadeIn 2.5s;
+    }
+    .slickPlaceholder {
+      display: block;
+      height: 0;
+      padding-bottom: 150%;
+      position: relative;
+      span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .slick-slider {
+    margin-bottom: 30px;
+  }
+}

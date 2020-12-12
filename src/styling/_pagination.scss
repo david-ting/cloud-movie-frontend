@@ -1,0 +1,16 @@
+.paginationWrapper {
+  .dropup {
+    display: none !important;
+  }
+  nav {
+    display: block;
+  }
+  @media only screen and (max-width: 600px) {
+    .dropup {
+      display: flex !important;
+    }
+    nav {
+      display: none;
+    }
+  }
+}

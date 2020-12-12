@@ -1,0 +1,22 @@
+#loadingPage {
+  position: absolute;
+  background-color: rgba(84, 85, 89, 0.95);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: white !important;
+  }
+  div:nth-child(2) {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,72 @@
+.videoWrapper {
+  display: flex;
+  h5:first-child {
+    width: 100%;
+  }
+  .youtubeModalWrapper {
+    margin-top: 10px;
+    width: calc(100% / 3);
+    @media only screen and (max-width: 1000px) {
+      width: calc(100% / 2);
+    }
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+  flex-wrap: wrap;
+}
+
+.youtubeModalWrapper {
+  position: relative;
+
+  .modal {
+    z-index: 100001;
+  }
+  .ytPreviewOuterWrapper {
+    width: 400px;
+    @media only screen and (max-width: 767px) {
+      width: 100%;
+    }
+    .ytPreviewInnerWrapper {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+  .modalTriger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-dialog {
+    max-width: 75vw;
+    margin: 1% auto 0 auto;
+    position: relative;
+    @media only screen and (max-width: 600px) {
+      max-width: 100vw;
+    }
+  }
+  .modal-body {
+    text-align: center;
+    iframe {
+      width: 70vw;
+      height: 40vw;
+      @media only screen and (max-width: 600px) {
+        width: 95vw;
+        height: 53vw;
+      }
+    }
+    padding: 5px 0 0 0;
+  }
+}
