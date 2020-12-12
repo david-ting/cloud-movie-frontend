@@ -20,7 +20,7 @@ function Movie_TV_Results(props) {
   }, [type, name, page, dispatch]);
 
   return (
-    <IconContext.Provider value={{ size: "5rem" }}>
+    <IconContext.Provider value={{ size: "80px" }}>
       {loading && <LoadingIndicator />}
       {!loading && (
         <>

@@ -71,7 +71,7 @@ function MovieTvDetailPage({ type }) {
         !videos ||
         !reviews ||
         !recommendations) && <LoadingPage />}
-      <IconContext.Provider value={{ size: "1.5rem" }}>
+      <IconContext.Provider value={{ size: "24px" }}>
         {Object.keys(result).length === 0 ? null : (
           <DetailContainer
             bgPath={

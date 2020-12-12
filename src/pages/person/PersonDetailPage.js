@@ -48,7 +48,7 @@ function PersonDetailPage() {
   }, [result]);
 
   return (
-    <IconContext.Provider value={{ color: "gray", size: "1.5rem" }}>
+    <IconContext.Provider value={{ color: "gray", size: "24px" }}>
       <div className="container" id="personWrapper">
         {result.profile_path && (
           <img

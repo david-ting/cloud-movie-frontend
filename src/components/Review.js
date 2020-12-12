@@ -35,7 +35,7 @@ function Review({ type, review, full }) {
           href={`https://www.themoviedb.org/review/${review.id}`}
         >
           <span className="mr-2">{review.author}</span>
-          <IconContext.Provider value={{ size: "1.5rem" }}>
+          <IconContext.Provider value={{ size: "24px" }}>
             <FiLink2 />
           </IconContext.Provider>
         </a>

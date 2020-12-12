@@ -20,7 +20,7 @@ function PersonResults() {
 
   return (
     <>
-      <IconContext.Provider value={{ color: "gray", size: "5rem" }}>
+      <IconContext.Provider value={{ color: "gray", size: "80px" }}>
         {loading && <LoadingIndicator />}
         {!loading && (
           <>

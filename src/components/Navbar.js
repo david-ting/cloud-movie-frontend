@@ -8,7 +8,7 @@ function Navbar() {
   const { pathname } = useLocation();
 
   return (
-    <IconContext.Provider value={{ color: "white", size: "1.5rem" }}>
+    <IconContext.Provider value={{ color: "white", size: "24px" }}>
       <>
         <nav className="navbar navbar-expand-lg">
           <Link className="navbar-brand" to="/">
