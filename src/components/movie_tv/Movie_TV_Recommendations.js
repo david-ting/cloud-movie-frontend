@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { useLocation, useParams } from "react-router-dom";
-import Movie_TV_Cards from "./Movie_TV_Cards";
+import Movie_TV_Card from "./Movie_TV_Card";
 import { fetchRecommendationsFunc } from "../../customFunc/all";
 import RecommendationPagination from "../pagination/RecommendationPagination";
 import LoadingIndicator from "../LoadingIndicator";
@@ -23,7 +23,9 @@ function Movie_TV_Recommendations() {
       <IconContext.Provider value={{ size: "5rem" }}>
         {list ? (
           <div className="mt-3 row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5">
-            <Movie_TV_Cards list={list} type={type} />
+            {list.map((result) => (
+              <Movie_TV_Card key={result.id} result={result} type={type} />
+            ))}
           </div>
         ) : (
           <LoadingIndicator />

@@ -28,39 +28,62 @@ if (process.env.NODE_ENV === "development") {
 /* 
 fetchPrefix = "https://cloud-movie-backend.herokuapp.com"; */
 
-export function searchOneType(type, name, page, dispatch, setSuggestions) {
-  // if (name !== "") {
-  fetch(`${fetchPrefix}/searchOneType/${type}/${name}/${page}`)
+export function searchOneType(type, name, page, dispatch) {
+  return fetch(`${fetchPrefix}/searchOneType/${type}/${name}/${page}`)
     .then((res) => {
-      console.log(res);
       if (res.status !== 200) {
         throw new Error(res.status);
       }
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-      if (dispatch !== false) {
-        dispatch({
-          type: "SET_LIST",
-          payload: data.results,
-        });
-        dispatch({
-          type: "SET_PAGE_INFO",
-          payload: {
-            totalPages: data.total_pages,
-            page: data.page,
-            totalResults: data.total_results,
-          },
-        });
-      } else {
-        setSuggestions(data.results);
-      }
+      dispatch({
+        type: "SET_LIST",
+        payload: data.results,
+      });
+      dispatch({
+        type: "SET_PAGE_INFO",
+        payload: {
+          totalPages: data.total_pages,
+          page: data.page,
+          totalResults: data.total_results,
+        },
+      });
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
     });
-  // }
+}
+
+export function suggestOneType(
+  type,
+  name,
+  page,
+  setSuggestions,
+  abortController
+) {
+  console.log(name);
+  fetch(`${fetchPrefix}/searchOneType/${type}/${name}/${page}`, {
+    signal: abortController.signal,
+  })
+    .then((res) => {
+      if (abortController.signal.aborted) {
+        throw new Error("aborted previous autosuggestions");
+      }
+      if (res.status !== 200) {
+        throw new Error(res.status);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (abortController.signal.aborted) {
+        throw new Error("aborted previous autosuggestions");
+      }
+      setSuggestions(data.results);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 export function fetchDetailFunc(type, id, dispatch) {

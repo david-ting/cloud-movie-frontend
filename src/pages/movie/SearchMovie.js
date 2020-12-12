@@ -1,33 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import SearchJumbotron from "../../components/SearchJumbotron";
-import SearchProvider from "../../context/search/SearchProvider";
-import movie_bg from "../../image/movie_bg-min.jpeg";
+import SearchWrapper from "../../components/SearchWrapper";
 
 function SearchMovie() {
+  const bgChoices = useMemo(
+    () => [
+      {
+        backgroundImage: `url("https://res.cloudinary.com/dmskcaysu/image/upload/v1607491491/cloud%20movie/movie_bg_qlefad.jpg")`,
+        backgroundPosition: "0 50px",
+      },
+      {
+        backgroundImage: `url("https://res.cloudinary.com/dmskcaysu/image/upload/v1607507762/cloud%20movie/movie_bg_2_rbarvt.jpg")`,
+        backgroundPosition: "50% 20px",
+      },
+      {
+        backgroundImage: `url("https://res.cloudinary.com/dmskcaysu/image/upload/v1607603010/cloud%20movie/movie_bg_3_bkvvka.jpg")`,
+        backgroundPosition: "right 20px",
+      },
+    ],
+    []
+  );
+
   useEffect(() => {
     document.title = "Search Movie | Cloud Movie";
   }, []);
+
   return (
-    <SearchProvider>
-      <div
-        style={{
-          backgroundImage: `url(https://res.cloudinary.com/dmskcaysu/image/upload/v1607491491/cloud%20movie/movie_bg_qlefad.jpg)`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top 50px",
-          backgroundSize: "cover",
-          height: "calc(100vh - 55px - 40px - 5px)",
-        }}
-      >
-        <div
-          className="container d-flex align-items-center"
-          style={{
-            height: "100%",
-          }}
-        >
-          <SearchJumbotron type="movie" />
-        </div>
-      </div>
-    </SearchProvider>
+    <SearchWrapper bgChoices={bgChoices}>
+      <SearchJumbotron type="movie" />
+    </SearchWrapper>
   );
 }
 

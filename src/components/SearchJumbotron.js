@@ -1,20 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { SearchContext } from "../context/search/SearchProvider";
-import { searchOneType } from "../customFunc/all";
+import { suggestOneType } from "../customFunc/all";
+import AutoSuggestion from "./AutoSuggestion";
+import useCancellableThrottle from "../customHook/useCancelableThrottle";
 
 function SearchJumbotron(props) {
   const { name } = useParams();
   const type = props.type;
   const { search, dispatch } = useContext(SearchContext);
-  const [suggestions, setSuggestions] = useState();
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [cursor, setCursor] = useState(-1);
+  const history = useHistory();
+
+  const {
+    cancellableThrottle: throttledSuggestions,
+    cancelRequest: cancelSuggestions,
+  } = useCancellableThrottle(suggestOneType);
 
   // search page 1 by default
   const toPath =
     search.query === ""
       ? `/${type}/search/`
-      : `/${type}/search/${search.query}/1`;
+      : `/${type}/search/${encodeURIComponent(search.query)}/1`;
+
+  console.log(encodeURIComponent(search.query));
+  console.log(toPath);
 
   const changeHandler = (event) => {
     dispatch({
@@ -22,36 +35,74 @@ function SearchJumbotron(props) {
       payload: event.target.value,
     });
     if (event.target.value) {
-      searchOneType(type, event.target.value, 1, false, setSuggestions);
+      throttledSuggestions(
+        type,
+        encodeURIComponent(event.target.value),
+        1,
+        setSuggestions
+      );
     } else {
-      setSuggestions();
+      setSuggestions([]);
+      cancelSuggestions();
+    }
+  };
+
+  const keyDownHandler = (event) => {
+    if (event.key === "ArrowDown" && showSuggestions && suggestions.length) {
+      event.preventDefault();
+    }
+
+    if (event.key === "ArrowUp" && showSuggestions && suggestions.length) {
+      event.preventDefault();
+    }
+
+    setShowSuggestions(true);
+
+    if (
+      event.key === "Enter" &&
+      (suggestions.length === 0 || cursor === -1 || !showSuggestions)
+    ) {
+      setShowSuggestions(false);
+      setSuggestions([]);
+      history.push(toPath);
+    }
+
+    if (
+      event.key !== "ArrowDown" &&
+      event.key !== "ArrowUp" &&
+      event.key !== "Enter"
+    ) {
+      setCursor(-1);
     }
   };
 
   const blurHandler = (event) => {
-    console.log(event.relatedTarget);
     if (
       (!event.relatedTarget ||
         !event.relatedTarget.classList.contains("autocomplete")) &&
       document.querySelector(".autocompleteWrapper")
     )
-      document.querySelector(".autocompleteWrapper").style.visibility =
-        "hidden";
-  };
-  const focusHandler = () => {
-    if (document.querySelector(".autocompleteWrapper"))
-      document.querySelector(".autocompleteWrapper").style.visibility =
-        "visible";
+      setShowSuggestions(false);
   };
 
   useEffect(() => {
     if (name) {
       dispatch({
         type: "SET_QUERY",
-        payload: name,
+        payload: decodeURIComponent(name),
       });
     }
   }, [name, dispatch]);
+
+  useEffect(() => {
+    if (search.query === "" && suggestions.length !== 0) {
+      setSuggestions([]);
+    }
+  }, [suggestions, setSuggestions, search.query]);
+
+  useEffect(() => {
+    return () => cancelSuggestions();
+  }, []);
 
   return (
     <div className="jumbotron jumbotron-fluid searchJumbotron">
@@ -66,27 +117,20 @@ function SearchJumbotron(props) {
             value={search.query}
             onChange={changeHandler}
             onBlur={blurHandler}
-            onFocus={focusHandler}
+            onKeyDown={keyDownHandler}
           />
           <div className="input-group-append">
-            <Link to={toPath} className="btn btn-purple" id="searchBtn">
+            <Link to={toPath} className="btn theme-btn" id="searchBtn">
               <FaSearch />
             </Link>
           </div>
-          {suggestions && suggestions.length >= 1 && (
-            <ul className="autocompleteWrapper">
-              {suggestions.map((suggestion) => (
-                <li key={suggestion.id}>
-                  <Link
-                    to={`/${type}/detail/${suggestion.id}`}
-                    className="autocomplete"
-                  >
-                    {type === "movie" && suggestion.title}
-                    {(type === "tv" || type === "person") && suggestion.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {showSuggestions && suggestions.length >= 1 && (
+            <AutoSuggestion
+              suggestions={suggestions}
+              type={type}
+              cursor={cursor}
+              setCursor={setCursor}
+            />
           )}
         </div>
       </div>

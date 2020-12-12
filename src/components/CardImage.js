@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 
-function CardImage({ image_path, title }) {
-  const [spin, setSpin] = useState(true);
-
+function CardImage({ image_path, title, spin, setSpin }) {
   const loadingStyle = {
-    height: "70%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
   };
   const completeStyle = {
-    ...loadingStyle,
     display: "none",
   };
 
   return (
     <>
-      <div className="card-img-top" style={spin ? loadingStyle : completeStyle}>
+      <div
+        className="spinner-wrapper"
+        style={spin ? loadingStyle : completeStyle}
+      >
         <div className="spinner-border text-secondary" role="status">
           <span className="sr-only">Loading...</span>
         </div>

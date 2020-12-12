@@ -1,38 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdLocalMovies } from "react-icons/md";
 import CardImage from "../CardImage";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../customFunc/all";
 
-function Movie_TV_Cards({ list, type }) {
+function Movie_TV_Card({ result, type }) {
+  // spinning for the movie or tv images
+  const [spin, setSpin] = useState(!result.poster_path ? false : true);
+
   return (
     <>
-      {list.map((result) => (
-        <div className="col mb-4 px-2" key={result.id}>
-          <div className="card h-100">
-            {!result.poster_path ? (
-              <div
-                className="card-img-top"
-                style={{
-                  backgroundColor: "gray",
-                  height: "300px",
-                  color: "white",
-                  fontSize: "1.5rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  textAlign: "center",
-                  padding: "10px",
-                }}
-              >
-                <div>
-                  <MdLocalMovies />
-                </div>
+      <div
+        className="col mb-4 px-2"
+        key={result.id}
+        style={{ minHeight: "200px" }}
+      >
+        <div className="card h-100 position-relative">
+          {!result.poster_path ? (
+            <div className="card-img-top defaultMovieTvImgWrapper">
+              <div>
+                <MdLocalMovies />
               </div>
-            ) : (
-              <CardImage image_path={result.poster_path} title={result.title} />
-            )}
-            <div className="card-body">
+            </div>
+          ) : (
+            <CardImage
+              image_path={result.poster_path}
+              title={result.title}
+              spin={spin}
+              setSpin={setSpin}
+            />
+          )}
+          {!spin && (
+            <div className="card-body" style={{ padding: "10px" }}>
               <h5 className="card-title">
                 {type === "movie" && result.title}
                 {type === "tv" && result.name}
@@ -58,11 +57,11 @@ function Movie_TV_Cards({ list, type }) {
                 Detail
               </Link>
             </div>
-          </div>
+          )}
         </div>
-      ))}
+      </div>
     </>
   );
 }
 
-export default Movie_TV_Cards;
+export default Movie_TV_Card;

@@ -1,33 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import SearchJumbotron from "../../components/SearchJumbotron";
-import SearchProvider from "../../context/search/SearchProvider";
-import tv_bg from "../../image/tv_bg-min.jpg";
+import SearchWrapper from "../../components/SearchWrapper";
 
 function SearchTv() {
+  const bgChoices = useMemo(
+    () => [
+      {
+        backgroundImage: `url("https://res.cloudinary.com/dmskcaysu/image/upload/v1607604978/cloud%20movie/tv_bg_2_jws6xh.jpg")`,
+        backgroundPosition: "50% 20px",
+      },
+      {
+        backgroundImage: `url("https://res.cloudinary.com/dmskcaysu/image/upload/v1607491505/cloud%20movie/tv_bg_anpkpl.jpg")`,
+        backgroundPosition: "50% 80%",
+      },
+      {
+        backgroundImage: `url(" https://res.cloudinary.com/dmskcaysu/image/upload/v1607605826/cloud%20movie/tv_bg_3_allirs.jpg")`,
+        backgroundPosition: "50% 20%",
+      },
+    ],
+    []
+  );
   useEffect(() => {
     document.title = "Search Tv | Cloud Movie";
   }, []);
   return (
-    <SearchProvider>
-      <div
-        style={{
-          backgroundImage: `url(https://res.cloudinary.com/dmskcaysu/image/upload/v1607491505/cloud%20movie/tv_bg_anpkpl.jpg)`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          height: "calc(100vh - 55px - 40px - 5px)",
-        }}
-      >
-        <div
-          className="container d-flex align-items-center"
-          style={{
-            height: "100%",
-          }}
-        >
-          <SearchJumbotron type="tv" />
-        </div>
-      </div>
-    </SearchProvider>
+    <SearchWrapper bgChoices={bgChoices}>
+      <SearchJumbotron type="tv" />
+    </SearchWrapper>
   );
 }
 

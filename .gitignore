@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .eslintrc.json
+.eslintcache
 build
+package copy.json
+/image
 
 # dependencies
 /node_modules

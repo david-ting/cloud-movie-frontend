@@ -7,9 +7,11 @@ import SearchPagination from "../../components/pagination/SearchPagination";
 function MatchedPeople() {
   return (
     <SearchProvider>
-      <SearchJumbotron type="person" />
-      <PersonResults />
-      <SearchPagination type="person" />
+      <div className="container">
+        <SearchJumbotron type="person" />
+        <PersonResults />
+        <SearchPagination type="person" />
+      </div>
     </SearchProvider>
   );
 }
