@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { FaLink } from "react-icons/fa";
@@ -12,6 +12,7 @@ function PersonDetailPage() {
   const biographyContainer = useRef(null);
   const readMoreBtn = useRef(null);
   const whiteFilter = useRef(null);
+  const [notFound, setNotFound] = useState(false);
 
   const readMore = (e) => {
     biographyContainer.current.style.overflow = "visible";
@@ -25,7 +26,7 @@ function PersonDetailPage() {
       type: "SET_TARGET_ID",
       payload: id,
     });
-    fetchDetailFunc("person", id, dispatch);
+    fetchDetailFunc("person", id, dispatch, setNotFound);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -46,6 +47,15 @@ function PersonDetailPage() {
   useEffect(() => {
     document.title = `${result.name ? result.name : ""} - Person | Cloud Movie`;
   }, [result]);
+
+  if (notFound) {
+    return (
+      <div className="container pt-5">
+        <h3>404 Page Not Found</h3>
+        <h3>Sorry, the requested resource is not ready yet.</h3>
+      </div>
+    );
+  }
 
   return (
     <IconContext.Provider value={{ color: "gray", size: "24px" }}>

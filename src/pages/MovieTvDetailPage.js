@@ -36,6 +36,7 @@ function MovieTvDetailPage({ type }) {
   const [videos, setVideos] = useState();
   const [reviews, setReviews] = useState();
   const [recommendations, setRecommendations] = useState();
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     setMainColor([80, 80, 80]);
@@ -43,7 +44,7 @@ function MovieTvDetailPage({ type }) {
       type: "SET_TARGET_ID",
       payload: id,
     });
-    fetchDetailFunc(type, id, dispatch);
+    fetchDetailFunc(type, id, dispatch, setNotFound);
     fetchVideosFunc(type, id, setVideos);
     fetchReviewsFunc(type, id, setReviews);
     fetchRecommendationsFunc(type, id, setRecommendations);
@@ -64,6 +65,15 @@ function MovieTvDetailPage({ type }) {
     if (!display) display = "";
     document.title = `${display} - ${capitalizeFirstChar(type)} | Cloud Movie`;
   }, [type, result]);
+
+  if (notFound) {
+    return (
+      <div className="container pt-5">
+        <h3>404 Page Not Found</h3>
+        <h3>Sorry, the requested resource is not ready yet.</h3>
+      </div>
+    );
+  }
 
   return (
     <>

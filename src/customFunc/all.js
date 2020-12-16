@@ -85,7 +85,7 @@ export function suggestOneType(
     });
 }
 
-export function fetchDetailFunc(type, id, dispatch) {
+export function fetchDetailFunc(type, id, dispatch, setNotFound) {
   fetch(`${fetchPrefix}/fetchDetail/${type}/${id}`)
     .then((response) => {
       if (response.status !== 200) {
@@ -100,6 +100,9 @@ export function fetchDetailFunc(type, id, dispatch) {
       });
     })
     .catch((error) => {
+      if (error.message === "404") {
+        setNotFound(true);
+      }
       console.error(error);
     });
 }
