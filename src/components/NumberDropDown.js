@@ -16,6 +16,9 @@ function NumberDropDown({
         className={`dropdown-item ${value === i ? "active" : null}`}
         style={{ paddingLeft: "20px", paddingRight: "20px" }}
         to={`${path}/${i}${postfix ? `/${postfix}` : ""}`}
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
       >
         {i}
       </Link>

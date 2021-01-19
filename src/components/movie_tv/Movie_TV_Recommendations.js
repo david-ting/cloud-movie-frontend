@@ -22,7 +22,7 @@ function Movie_TV_Recommendations() {
     <>
       <IconContext.Provider value={{ size: "80px" }}>
         {list ? (
-          <div className="mt-3 row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5">
+          <div className="mt-3 row row-cols-2 row-cols-md-4 row-cols-lg-5">
             {list.map((result) => (
               <Movie_TV_Card key={result.id} result={result} type={type} />
             ))}

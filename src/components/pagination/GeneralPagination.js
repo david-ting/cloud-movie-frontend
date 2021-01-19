@@ -16,6 +16,10 @@ function GeneralPagination(props) {
     currentPage === totalPages ? currentPage : currentPage + 1
   }`;
 
+  const moveWindowToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   let pagesHTML = [];
   let displayPages = [];
   let middle;
@@ -70,7 +74,11 @@ function GeneralPagination(props) {
           }`}
           key={displayPages[i]}
         >
-          <Link className="page-link" to={`${path}/${displayPages[i]}`}>
+          <Link
+            className="page-link"
+            to={`${path}/${displayPages[i]}`}
+            onClick={moveWindowToTop}
+          >
             {displayPages[i]}
           </Link>
         </li>
@@ -111,13 +119,19 @@ function GeneralPagination(props) {
                   className="page-link"
                   aria-label="Previous"
                   to={previousPath}
+                  onClick={moveWindowToTop}
                 >
                   <span aria-hidden="true">&laquo;</span>
                 </Link>
               </li>
               {pagesHTML}
               <li className="page-item">
-                <Link className="page-link" aria-label="Next" to={nextPath}>
+                <Link
+                  className="page-link"
+                  aria-label="Next"
+                  to={nextPath}
+                  onClick={moveWindowToTop}
+                >
                   <span aria-hidden="true">&raquo;</span>
                 </Link>
               </li>

@@ -82,7 +82,12 @@ function Carousel({ type, slides, autoplay }) {
 
           return (
             <div className="slick-slide" key={slide.id}>
-              <Link to={`/${type}/detail/${slide.id}`}>
+              <Link
+                to={`/${type}/detail/${slide.id}`}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
                 {imgPath ? (
                   <img className={`img-fadeIn img-${type}`} src={imgPath}></img>
                 ) : (
