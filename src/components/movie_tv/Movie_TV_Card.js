@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdLocalMovies } from "react-icons/md";
 import CardImage from "../CardImage";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { formatDate } from "../../customFunc/all";
 
 function Movie_TV_Card({ result, type }) {
   // spinning for the movie or tv images
   const [spin, setSpin] = useState(!result.poster_path ? false : true);
+  const history = useHistory();
 
   return (
     <>
@@ -17,18 +18,30 @@ function Movie_TV_Card({ result, type }) {
       >
         <div className="card h-100 position-relative">
           {!result.poster_path ? (
-            <div className="card-img-top defaultMovieTvImgWrapper">
+            <div
+              className="card-img-top defaultMovieTvImgWrapper"
+              onClick={() => {
+                history.push(`/${type}/detail/${result.id}`);
+              }}
+            >
               <div>
                 <MdLocalMovies />
               </div>
             </div>
           ) : (
-            <CardImage
-              image_path={result.poster_path}
-              title={result.title}
-              spin={spin}
-              setSpin={setSpin}
-            />
+            <div
+              onClick={() => {
+                history.push(`/${type}/detail/${result.id}`);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <CardImage
+                image_path={result.poster_path}
+                title={result.title}
+                spin={spin}
+                setSpin={setSpin}
+              />
+            </div>
           )}
           {!spin && (
             <div className="card-body" style={{ padding: "10px" }}>

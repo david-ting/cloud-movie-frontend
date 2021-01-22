@@ -21,11 +21,13 @@ import MovieTvDetailPage from "./pages/MovieTvDetailPage";
 import PersonDetailPage from "./pages/person/PersonDetailPage";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
+import MoveUpButton from "./components/MoveUpButton";
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <MoveUpButton after={100} />
       <Switch>
         <Route exact path="/">
           <Redirect to="/trending/week" />

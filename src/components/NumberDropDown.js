@@ -17,7 +17,7 @@ function NumberDropDown({
         style={{ paddingLeft: "20px", paddingRight: "20px" }}
         to={`${path}/${i}${postfix ? `/${postfix}` : ""}`}
         onClick={() => {
-          window.scrollTo(0, 0);
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }}
       >
         {i}

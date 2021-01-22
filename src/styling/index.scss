@@ -26,6 +26,23 @@ body {
   position: relative;
 }
 
+.moveUpButton {
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  background: rgb(224, 219, 219);
+  z-index: 110000;
+  padding: 5px;
+  border-radius: 5px;
+  color: $themeColor;
+  font-weight: bold;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+  border: 2px solid rgb(224, 219, 219);
+}
+
 #mainContainer {
   background-color: rgb(230, 230, 243);
   min-height: 100vh;

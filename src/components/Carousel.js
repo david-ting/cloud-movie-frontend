@@ -85,7 +85,7 @@ function Carousel({ type, slides, autoplay }) {
               <Link
                 to={`/${type}/detail/${slide.id}`}
                 onClick={() => {
-                  window.scrollTo(0, 0);
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                 }}
               >
                 {imgPath ? (
